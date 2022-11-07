@@ -1,7 +1,6 @@
 package cn.ww.system.mapper;
 
 import cn.ww.model.entity.SysUser;
-import cn.ww.model.vo.SysRoleQueryVo;
 import cn.ww.model.vo.SysUserQueryVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;

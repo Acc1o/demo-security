@@ -3,7 +3,6 @@ package cn.ww.system.controller;
 
 import cn.ww.common.Result;
 import cn.ww.model.entity.SysUser;
-import cn.ww.model.vo.SysRoleQueryVo;
 import cn.ww.model.vo.SysUserQueryVo;
 import cn.ww.system.service.SysUserService;
 import com.baomidou.mybatisplus.core.metadata.IPage;

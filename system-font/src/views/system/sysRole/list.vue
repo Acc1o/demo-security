@@ -116,12 +116,12 @@ export default {
   methods:{
     //条件分页查询列表
     fetchList(pageNum=1){
-      //ajax请求
+
       this.page=pageNum
       api.getPageList(this.page,this.limit,this.searchInfo)
       .then(response =>{
         this.listLoading=false
-        //console.log(response)
+
         this.list=response.data.records
         this.total=response.data.total
       })

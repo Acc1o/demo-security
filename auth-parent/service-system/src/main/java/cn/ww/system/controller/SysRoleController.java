@@ -59,7 +59,9 @@ public class SysRoleController {
      */
     @ApiOperation("条件分页查询")
     @GetMapping("{page}/{limit}")
-    public Result findRoleByPage(@PathVariable Long page, @PathVariable Long limit, SysRoleQueryVo sysRoleQueryVo){
+    public Result findRoleByPage(@PathVariable Long page, 
+                                 @PathVariable Long limit, 
+                                 SysRoleQueryVo sysRoleQueryVo){
         Page<SysRole> pageParam = new Page<>(page, limit);
         IPage<SysRole> pageModel= sysRoleService.selectPage(pageParam,sysRoleQueryVo);
         return Result.ok(pageModel);

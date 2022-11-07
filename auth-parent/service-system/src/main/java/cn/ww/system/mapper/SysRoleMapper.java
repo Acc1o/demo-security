@@ -15,5 +15,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SysRoleMapper extends BaseMapper<SysRole> {
     
-    public IPage<SysRole> selectPage(Page<SysRole> pageParam,@Param("vo") SysRoleQueryVo sysRoleQueryVo);
+    IPage<SysRole> selectPage(Page<SysRole> pageParam,@Param("vo") SysRoleQueryVo sysRoleQueryVo);
 }
