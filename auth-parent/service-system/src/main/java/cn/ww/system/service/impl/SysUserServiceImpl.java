@@ -1,7 +1,6 @@
 package cn.ww.system.service.impl;
 
 import cn.ww.model.entity.SysUser;
-import cn.ww.model.vo.SysRoleQueryVo;
 import cn.ww.model.vo.SysUserQueryVo;
 import cn.ww.system.mapper.SysUserMapper;
 import cn.ww.system.service.SysUserService;
@@ -21,12 +20,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
-
-    @Autowired
-    SysUserMapper sysUserMapper;
     
     @Override
-    public IPage<SysUser> selectByPage(Page<SysUser> pageParam, SysUserQueryVo sysUser) {
-        return sysUserMapper.selectByPage(pageParam,sysUser);
+    public IPage<SysUser> selectByPage(Page<SysUser> pageParam, SysUserQueryVo sysUserQueryVo) {
+        return baseMapper.selectByPage(pageParam,sysUserQueryVo);
     }
 }

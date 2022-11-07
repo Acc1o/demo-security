@@ -1,7 +1,6 @@
 package cn.ww.system.service;
 
 import cn.ww.model.entity.SysUser;
-import cn.ww.model.vo.SysRoleQueryVo;
 import cn.ww.model.vo.SysUserQueryVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -17,6 +16,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SysUserService extends IService<SysUser> {
 
-    //用户列表
-    IPage<SysUser> selectByPage(Page<SysUser> pageParam, SysUserQueryVo sysUser);
+    /**
+     * 条件分页查询
+     * @param pageParam 分页参数
+     * @param sysUserQueryVo 查询查询
+     * @return
+     */
+    IPage<SysUser> selectByPage(Page<SysUser> pageParam, SysUserQueryVo sysUserQueryVo);
 }
