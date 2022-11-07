@@ -83,11 +83,11 @@ public class SysRoleController {
     }
     
     /**
-     * 根据Id修改
+     * 修改
      * @param sysRole
      * @return
      */
-    @ApiOperation("根据Id修改")
+    @ApiOperation("修改")
     @PostMapping("update")
     public Result updateRole(@RequestBody SysRole sysRole){
         boolean isSuccess = sysRoleService.updateById(sysRole);
