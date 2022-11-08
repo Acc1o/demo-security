@@ -23,4 +23,11 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     IPage<SysUser> selectByPage(Page<SysUser> pageParam, SysUserQueryVo sysUserQueryVo);
+
+    /**
+     * 修改用户状态
+     * @param id 用户id
+     * @param status 用户状态 标识(0 :启用  ,1 :禁用 )
+     */
+    void updateStatus(Long id, Integer status);
 }

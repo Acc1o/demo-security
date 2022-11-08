@@ -24,7 +24,7 @@ export default{
       })
     },
     //根据id查询
-    getRoleById(id){
+    getUserById(id){
       return request({
         //接口路径
         url: `${api_name}getUserById/${id}`,
@@ -41,11 +41,19 @@ export default{
       })
     },
     //根据id删除
-    remove(id){
+    removeById(id){
       return request({
         //接口路径
         url: `${api_name}/remove/${id}`,
         method: 'delete',//提交方式
+      })
+    },
+    //修改用户状态
+    updateStatus(id,status){
+      return request({
+        //接口路径
+        url: `${api_name}updateStatus/${id}/${status}`,
+        method: 'get',//提交方式
       })
     }
 }

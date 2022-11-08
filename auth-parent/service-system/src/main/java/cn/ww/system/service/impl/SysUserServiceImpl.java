@@ -7,7 +7,6 @@ import cn.ww.system.service.SysUserService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,4 +24,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public IPage<SysUser> selectByPage(Page<SysUser> pageParam, SysUserQueryVo sysUserQueryVo) {
         return baseMapper.selectByPage(pageParam,sysUserQueryVo);
     }
-}
+
+    @Override
+    public void updateStatus(Long id, Integer status) {
+        SysUser sysUser = baseMapper.selectById(id);
+        sysUser.setStatus(status);
+        baseMapper.updateById(sysUser);
+    }
+}   

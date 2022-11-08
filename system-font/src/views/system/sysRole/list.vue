@@ -12,7 +12,7 @@
           </el-col>
         </el-row>
         <el-row style="display:flex">
-          <el-button type="primary" icon="el-icon-search" size="mini"  @click="fetchList()">搜索</el-button>
+          <el-button type="primary" icon="el-icon-search" size="mini"  @click="fetchData()">搜索</el-button>
           <el-button icon="el-icon-refresh" size="mini" @click="resetData">重置</el-button>
         </el-row>
       </el-form>
@@ -60,7 +60,7 @@
     :page-size="limit"
     style="padding: 30px 0; text-align: center;"
     layout="total, prev, pager, next, jumper"
-    @current-change="fetchList"
+    @current-change="fetchData"
   />
 
   <!-- 弹窗组件 -->
@@ -98,7 +98,7 @@ export default {
       //当前页
       page: 1,
       //每页记录数
-      limit: 3,
+      limit: 10,
       //条件查询对象
       searchInfo: {},
       //封装添加表单的数据
@@ -110,13 +110,12 @@ export default {
   },
   //页面渲染之前执行
   created(){
-    this.fetchList()
+    this.fetchData()
   },
   //具体方法
   methods:{
     //条件分页查询列表
-    fetchList(pageNum=1){
-
+    fetchData(pageNum=1){
       this.page=pageNum
       api.getPageList(this.page,this.limit,this.searchInfo)
       .then(response =>{
@@ -130,25 +129,8 @@ export default {
     resetData() {
         console.log('重置查询表单')
         this.searchInfo = {}
-        this.fetchList()
+        this.fetchData()
     },
-    //删除
-    removeById(id){
-        this.$confirm('此操作将永久删除该记录, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-        }).then(() => { // promise
-            // 点击确定，远程调用ajax
-            return api.removeById(id)
-        }).then((response) => {
-            this.fetchList(this.page)
-            this.$message.success(response.message || '删除成功')
-        }).catch(() => {
-            this.$message.info('取消删除')
-        })
-    },
-
     //弹出添加的表单
     add(){
       this.dialogVisible = true
@@ -162,16 +144,22 @@ export default {
         this.update()
       }
     },
-
     //添加
     save() {
       api.save(this.sysRole).then(response => {
         this.$message.success(response.message || '操作成功')
         this.dialogVisible = false
-        this.fetchList(this.page)
+        this.fetchData(this.page)
       })
     },
-
+    //更新
+    update() {
+      api.update(this.sysRole).then(response => {
+        this.$message.success(response.message || '操作成功')
+        this.dialogVisible = false
+        this.fetchData(this.page)
+      })
+    },
     //根据id获取数据
     edit(id){
     //弹窗
@@ -180,18 +168,21 @@ export default {
         this.sysRole=response.data
       })
     },
-    //更新
-    update() {
-      api.updateById(this.sysRole).then(response => {
-        this.$message.success(response.message || '操作成功')
-        this.dialogVisible = false
-        this.fetchList(this.page)
+    //删除
+    removeById(id){
+      this.$confirm('此操作将永久删除该记录, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => { // promise
+        // 点击确定，远程调用ajax
+        return api.removeById(id)
+      }).then((response) => {
+        this.fetchData(this.page)
+        this.$message.success(response.message || '删除成功')
+      }).catch(() => {
+        this.$message.info('取消删除')
       })
-    },
-    // 当多选选项发生变化的时候调用
-    handleSelectionChange(selection) {
-      console.log(selection)
-      this.selectValue = selection
     },
     // 批量删除
     batchRemove() {
@@ -213,14 +204,19 @@ export default {
         // 调用api
         return api.batchRemove(idList)
       }).then((response) => {
-        this.fetchList()
+        this.fetchData()
         this.$message.success(response.message)
       }).catch(error => {
         if (error === 'cancel') {
           this.$message.info('取消删除')
         }
       })
-    }
+    },
+    // 当多选选项发生变化的时候调用
+    handleSelectionChange(selection) {
+      console.log(selection)
+      this.selectValue = selection
+    },
   }
 
 }

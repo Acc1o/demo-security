@@ -27,22 +27,34 @@ public class SysUserController {
 
     @Autowired
     private SysUserService sysUserService;
-    
+
+    /**
+     * 用户列表
+     * @param page 页码
+     * @param limit 记录数
+     * @param sysUserQueryVo entity查询对象
+     * @return
+     */
     @ApiOperation("用户列表")
     @GetMapping("/{page}/{limit}")
     public Result List(@PathVariable Long page,
                        @PathVariable Long limit,
-                       SysUserQueryVo sysUser){
+                       SysUserQueryVo sysUserQueryVo){
 
         Page<SysUser> pageParam = new Page<>(page, limit);
-        IPage<SysUser> pageModel = sysUserService.selectByPage(pageParam,sysUser);
+        IPage<SysUser> pageModel = sysUserService.selectByPage(pageParam,sysUserQueryVo);
         return Result.ok(pageModel);
     }
 
+    /**
+     * 添加用户
+     * @param sysUser entity对象
+     * @return
+     */
     @ApiOperation("添加用户")
     @PostMapping("save")
-    public Result save(@RequestBody SysUser user){
-        boolean isSuccess = sysUserService.save(user);
+    public Result save(@RequestBody SysUser sysUser){
+        boolean isSuccess = sysUserService.save(sysUser);
         if (isSuccess){
             return Result.ok();
         }else {
@@ -50,17 +62,27 @@ public class SysUserController {
         }
     }
 
+    /**
+     * 根据id用户查询
+     * @param id 用户id
+     * @return
+     */
     @ApiOperation("根据id用户查询")
-    @GetMapping("getUser/{id}")
-    public Result getUser(@PathVariable String id){
+    @GetMapping("getUserById/{id}")
+    public Result getUserById(@PathVariable String id){
         SysUser user = sysUserService.getById(id);
         return Result.ok(user);
     }
 
+    /**
+     * 修改用户
+     * @param sysUser entity对象
+     * @return
+     */
     @ApiOperation("修改用户")
     @PostMapping("update")
-    public Result update(@RequestBody SysUser user){
-        boolean isSuccess = sysUserService.updateById(user);
+    public Result update(@RequestBody SysUser sysUser){
+        boolean isSuccess = sysUserService.updateById(sysUser);
         if (isSuccess){
             return Result.ok();
         }else {
@@ -68,6 +90,11 @@ public class SysUserController {
         }
     }
 
+    /**
+     * 删除用户
+     * @param id 用户id
+     * @return
+     */
     @ApiOperation("删除用户")
     @DeleteMapping("remove/{id}")
     public Result remove(@PathVariable String id){
@@ -77,6 +104,19 @@ public class SysUserController {
         }else {
             return Result.fail();
         }
+    }
+
+    /**
+     * 更新用户状态
+     * @param id 用户id
+     * @param status 用户状态 标识(0 :启用  ,1 :禁用 )
+     * @return
+     */
+    @ApiOperation(value = "更新状态")
+    @GetMapping("updateStatus/{id}/{status}")
+    public Result updateStatus(@PathVariable Long id, @PathVariable Integer status) {
+        sysUserService.updateStatus(id, status);
+        return Result.ok();
     }
 }
 
