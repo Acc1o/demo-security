@@ -107,12 +107,12 @@ public class SysUserController {
     }
 
     /**
-     * 更新用户状态
+     * 修改用户状态
      * @param id 用户id
      * @param status 用户状态 标识(0 :启用  ,1 :禁用 )
      * @return
      */
-    @ApiOperation(value = "更新状态")
+    @ApiOperation(value = "修改状态")
     @GetMapping("updateStatus/{id}/{status}")
     public Result updateStatus(@PathVariable Long id, @PathVariable Integer status) {
         sysUserService.updateStatus(id, status);

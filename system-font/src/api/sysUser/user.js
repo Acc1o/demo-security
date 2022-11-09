@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 //常量
-const api_name='/admin/system/sysUser/'
+const api_name='/admin/system/sysUser'
 
 export default{
     //列表
@@ -27,7 +27,7 @@ export default{
     getUserById(id){
       return request({
         //接口路径
-        url: `${api_name}getUserById/${id}`,
+        url: `${api_name}/getUserById/${id}`,
         method: 'get',//提交方式
       })
     },
@@ -52,7 +52,7 @@ export default{
     updateStatus(id,status){
       return request({
         //接口路径
-        url: `${api_name}updateStatus/${id}/${status}`,
+        url: `${api_name}/updateStatus/${id}/${status}`,
         method: 'get',//提交方式
       })
     }

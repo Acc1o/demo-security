@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 //常量
-const api_name='/admin/system/sysRole/'
+const api_name='/admin/system/sysRole'
 
 export default{
     //列表
@@ -27,7 +27,7 @@ export default{
     getRoleById(id){
       return request({
         //接口路径
-        url: `${api_name}findRoleById/${id}`,
+        url: `${api_name}/findRoleById/${id}`,
         method: 'post',//提交方式
       })
     },
@@ -72,5 +72,6 @@ export default{
         method: 'post',
         data: assginRoleVo
       })
-    }
+    },
+
 }

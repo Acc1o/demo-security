@@ -28,7 +28,7 @@ import java.util.Map;
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
     
     @Autowired
-    SysUserRoleMapper sysUserRoleMapper;
+    private SysUserRoleMapper sysUserRoleMapper;
     
     @Override
     public IPage<SysRole> selectPage(Page<SysRole> pageParam, SysRoleQueryVo sysRoleQueryVo) {
