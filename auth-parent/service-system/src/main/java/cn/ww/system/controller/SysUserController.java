@@ -1,7 +1,8 @@
 package cn.ww.system.controller;
 
 
-import cn.ww.common.Result;
+import cn.ww.common.result.Result;
+import cn.ww.common.utils.MD5;
 import cn.ww.model.entity.SysUser;
 import cn.ww.model.vo.SysUserQueryVo;
 import cn.ww.system.service.SysUserService;
@@ -9,14 +10,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
+
 /**
- * <p>
- * 用户表 前端控制器
- * </p>
- *
  * @author Suww
  * @since 2022-11-03
  */
@@ -25,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin//system/sysUser")
 public class SysUserController {
 
-    @Autowired
+    @Resource
     private SysUserService sysUserService;
 
     /**
@@ -37,7 +36,7 @@ public class SysUserController {
      */
     @ApiOperation("用户列表")
     @GetMapping("/{page}/{limit}")
-    public Result List(@PathVariable Long page,
+    public Result list(@PathVariable Long page,
                        @PathVariable Long limit,
                        SysUserQueryVo sysUserQueryVo){
 
@@ -54,6 +53,8 @@ public class SysUserController {
     @ApiOperation("添加用户")
     @PostMapping("save")
     public Result save(@RequestBody SysUser sysUser){
+        String encrypt = MD5.encrypt(sysUser.getPassword());
+        sysUser.setPassword(encrypt);
         boolean isSuccess = sysUserService.save(sysUser);
         if (isSuccess){
             return Result.ok();

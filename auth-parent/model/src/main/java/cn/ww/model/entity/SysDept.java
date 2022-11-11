@@ -8,7 +8,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;
-
+/**
+ * @author Suww
+ */
 @Data
 @ApiModel(description = "部门")
 @TableName("sys_dept")

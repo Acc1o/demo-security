@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import cn.ww.model.base.BaseEntity;
 import lombok.Data;
 
-
+/**
+ * @author Suww
+ */
 @Data
 @TableName("sys_role")
 public class SysRole extends BaseEntity {

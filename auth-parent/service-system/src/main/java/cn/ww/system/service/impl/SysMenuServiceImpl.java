@@ -3,18 +3,19 @@ package cn.ww.system.service.impl;
 
 import cn.ww.model.entity.SysMenu;
 import cn.ww.model.entity.SysRoleMenu;
-import cn.ww.model.entity.SysUser;
 import cn.ww.model.vo.AssginMenuVo;
-import cn.ww.system.exception.ExceptionHandle;
+import cn.ww.model.vo.RouterVo;
+import cn.ww.system.exception.HandleException;
 import cn.ww.system.mapper.SysMenuMapper;
 import cn.ww.system.mapper.SysRoleMenuMapper;
 import cn.ww.system.service.SysMenuService;
 import cn.ww.system.utils.MenuHelper;
+import cn.ww.system.utils.RouterHelper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ import java.util.List;
 @Service
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService {
 
-    @Autowired
+    @Resource
     private SysRoleMenuMapper sysRoleMenuMapper;
     
     @Override
@@ -46,7 +47,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         wrapper.eq("parent_id",id);
         Integer count = baseMapper.selectCount(wrapper);
         if(count > 0){
-            throw new ExceptionHandle(201,"请先删除子菜单");
+            throw new HandleException(201,"请先删除子菜单");
         }
         baseMapper.deleteById(id);
     }
@@ -99,5 +100,47 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             sysRoleMenu.setRoleId(assginMenuVo.getRoleId());
             sysRoleMenuMapper.insert(sysRoleMenu);
         }
+    }
+
+    @Override
+    public List<RouterVo> getUserMenuRouterList(String userId) {
+        List<SysMenu> sysmenuList = null;
+        
+        if(userId.equals("1")){
+            QueryWrapper<SysMenu> wrapper = new QueryWrapper<>();
+            wrapper.eq("status","1");
+            wrapper.orderByDesc("sort_value");
+            sysmenuList = baseMapper.selectList(wrapper);
+            
+        }else {
+            sysmenuList = baseMapper.getMenuListUserId(userId);
+        }
+
+        List<SysMenu> sysMenuTreeList = MenuHelper.buildTree(sysmenuList);
+
+        return  RouterHelper.buildRouters(sysMenuTreeList);
+        
+    }
+
+    @Override
+    public List<String> getUserMenuButtonList(String userId) {
+        List<SysMenu> sysmenuList = null;
+
+        if(userId.equals("1")){
+            QueryWrapper<SysMenu> wrapper = new QueryWrapper<>();
+            wrapper.eq("status","1");
+            sysmenuList = baseMapper.selectList(wrapper);
+
+        }else {
+            sysmenuList = baseMapper.getMenuListUserId(userId);
+        }
+        List<String> list = new ArrayList<>();
+        for (SysMenu sysMenu : sysmenuList) {
+            if(sysMenu.getType() == 2){
+                String perms = sysMenu.getPerms();
+                list.add(perms);
+            }
+        }
+        return list;
     }
 }

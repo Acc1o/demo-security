@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
+/**
+ * @author Suww
+ */
 @Data
 @ApiModel(description = "岗位")
 @TableName("sys_post")

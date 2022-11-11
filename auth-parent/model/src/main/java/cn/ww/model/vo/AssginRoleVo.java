@@ -6,7 +6,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;
-
+/**
+ * @author Suww
+ */
 @ApiModel(description = "分配菜单")
 @Data
 public class AssginRoleVo {

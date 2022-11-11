@@ -1,6 +1,6 @@
 package cn.ww.system.controller;
 
-import cn.ww.common.Result;
+import cn.ww.common.result.Result;
 import cn.ww.model.entity.SysRole;
 import cn.ww.model.vo.AssginRoleVo;
 import cn.ww.model.vo.SysRoleQueryVo;
@@ -9,9 +9,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +25,7 @@ import java.util.Map;
 @RequestMapping("/admin/system/sysRole")
 public class SysRoleController {
     
-    @Autowired
+    @Resource
     private SysRoleService sysRoleService;
 
 
@@ -149,7 +149,7 @@ public class SysRoleController {
 
     /**
      * 分配用户角色 
-     * @param assignRoleVo 角色:用户关系表对象
+     * @param assignRoleVo 角色:用户 关系表对象
      * @return
      */
     @ApiOperation("分配用户角色")

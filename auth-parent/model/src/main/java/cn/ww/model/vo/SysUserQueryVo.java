@@ -8,9 +8,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * <p>
- * 用户查询实体
- * </p>
+ * @author Suww
  */
 @Data
 public class SysUserQueryVo implements Serializable {

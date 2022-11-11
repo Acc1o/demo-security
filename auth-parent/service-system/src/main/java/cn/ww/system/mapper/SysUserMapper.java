@@ -10,10 +10,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
- * <p>
- * 用户表 Mapper 接口
- * </p>
- *
  * @author Suww
  * @since 2022-11-03
  */
@@ -21,6 +17,12 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
-    IPage<SysUser> selectByPage(Page<SysUser> pageParam,@Param("vo") SysUserQueryVo sysUser);
+    /**
+     * 条件分页查询
+     * @param pageParam 分页参数
+     * @param sysUserQueryVo entity查询对象
+     * @return
+     */
+    IPage<SysUser> selectByPage(Page<SysUser> pageParam,@Param("vo") SysUserQueryVo sysUserQueryVo);
 
 }

@@ -1,4 +1,4 @@
-package cn.ww.common;
+package cn.ww.common.result;
 
 import lombok.Data;
 
@@ -9,17 +9,32 @@ import lombok.Data;
 @Data
 public class Result<T> {
 
-    private Integer code;    //返回码
-    private String message;    //返回消息   
-    private T data;    //返回数据
+    /**
+     * 返回码
+     */
+    private Integer code; 
+    /**
+     * 返回消息   
+     */
+    private String message;
+    /**
+     * 返回数据
+     */
+    private T data;
 
     public Result(){}
 
-    // 返回数据
+    /**
+     *  返回数据
+     * @param data
+     * @param <T>
+     * @return
+     */
     protected static <T> Result<T> build(T data) {
         Result<T> result = new Result<T>();
-        if (data != null)
+        if (data != null){
             result.setData(data);
+        }
         return result;
     }
 

@@ -11,7 +11,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * @author Suww
+ */
 @Data
 public class BaseEntity implements Serializable {
 
@@ -24,7 +26,10 @@ public class BaseEntity implements Serializable {
     @TableField("update_time")
     private Date updateTime;
 
-    @TableLogic  //逻辑删除 默认效果 0 没有删除 1 已经删除
+    /**
+     *  逻辑删除 默认效果 0 没有删除 1 已经删除
+     */
+    @TableLogic
     @TableField("is_deleted")
     private Integer isDeleted;
 

@@ -8,7 +8,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;
-
+/**
+ * @author Suww
+ */
 @Data
 @ApiModel(description = "菜单")
 @TableName("sys_menu")
@@ -52,10 +54,15 @@ public class SysMenu extends BaseEntity {
 	@TableField("status")
 	private Integer status;
 
-	// 下级列表
+	/**
+	 * 下级列表
+	 */
 	@TableField(exist = false)
 	private List<SysMenu> children;
-	//是否选中
+
+	/**
+	 * 是否选中
+	 */
 	@TableField(exist = false)
 	private boolean isSelect;
 }

@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,8 +27,8 @@ import java.util.Map;
 
 @Service
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
-    
-    @Autowired
+
+    @Resource
     private SysUserRoleMapper sysUserRoleMapper;
     
     @Override
@@ -49,7 +50,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
             userRoleIds.add(roleId);
         }
         //创建返回的Map
-        Map<String, Object> userRolesMap = new HashMap<>();
+        Map<String, Object> userRolesMap = new HashMap<>(16);
         userRolesMap.put("allRoles",roles);
         userRolesMap.put("userRoleIds",userRoleIds);
         return userRolesMap;

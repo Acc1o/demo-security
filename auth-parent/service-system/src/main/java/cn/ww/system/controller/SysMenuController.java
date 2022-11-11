@@ -1,22 +1,18 @@
 package cn.ww.system.controller;
 
 
-import cn.ww.common.Result;
+import cn.ww.common.result.Result;
 import cn.ww.model.entity.SysMenu;
 import cn.ww.model.vo.AssginMenuVo;
 import cn.ww.system.service.SysMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
-/**
- * <p>
- * 菜单表 前端控制器
- * </p>
- *
+ /**
  * @author Suww
  * @since 2022-11-09
  */
@@ -25,8 +21,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/system/sysMenu")
 public class SysMenuController {
-    
-    @Autowired
+
+     @Resource
     private SysMenuService sysMenuService;
 
     /**
@@ -114,7 +110,7 @@ public class SysMenuController {
     }
 
     /**
-     * assignMenuVo
+     * 角色分配权限
      * @param assignMenuVo 分配菜单vo对象
      * @return
      */

@@ -2,7 +2,9 @@ package cn.ww.model.vo;
 
 import lombok.Data;
 import io.swagger.annotations.ApiModelProperty;
-
+/**
+ * @author Suww
+ */
 @Data
 public class SysLoginLogQueryVo {
 	

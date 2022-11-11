@@ -25,7 +25,7 @@ import java.util.List;
 
 @Configuration
 @EnableSwagger2WebMvc
-public class Knife4JConfig {
+public class Knife4jConfig {
     @Bean
     public Docket adminApiConfig(){
         List<Parameter> pars = new ArrayList<>();

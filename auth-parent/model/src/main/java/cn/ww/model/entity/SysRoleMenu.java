@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
+/**
+ * @author Suww
+ */
 @Data
 @ApiModel(description = "角色菜单")
 @TableName("sys_role_menu")

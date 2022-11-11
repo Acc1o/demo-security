@@ -6,7 +6,9 @@ import cn.ww.model.base.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
+/**
+ * @author Suww
+ */
 @Data
 @ApiModel(description = "用户角色")
 @TableName("sys_user_role")

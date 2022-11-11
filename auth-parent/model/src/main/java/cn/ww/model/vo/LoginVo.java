@@ -3,6 +3,7 @@ package cn.ww.model.vo;
 
 /**
  * 登录对象
+ *@author Suww
  */
 public class LoginVo {
 

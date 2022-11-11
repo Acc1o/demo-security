@@ -2,4 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ww.system.mapper.SysMenuMapper">
 
+    <resultMap id="sysMenuMap" type="cn.ww.model.entity.SysMenu" autoMapping="true" />
+    
+    <select id="getMenuListUserId" resultMap="sysMenuMap">
+        SELECT DISTINCT
+            sm.id,
+            sm.parent_id,
+            sm.NAME,
+            sm.type,
+            sm.path,
+            sm.component,
+            sm.perms,
+            sm.icon,
+            sm.sort_value,
+            sm.STATUS,
+            sm.create_time,
+            sm.update_time,
+            sm.is_deleted
+        FROM
+            sys_menu sm
+                INNER JOIN sys_role_menu srm ON sm.id = srm.menu_id
+                INNER JOIN sys_user_role sur ON srm.role_id = sur.role_id
+        WHERE
+            sur.user_id = #{userId}
+          AND sm.STATUS = 1
+          AND srm.is_deleted = 0
+          AND sur.is_deleted = 0
+          AND sm.is_deleted = 0
+    </select>
+    
 </mapper>

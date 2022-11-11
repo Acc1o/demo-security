@@ -1,7 +1,9 @@
 package cn.ww.model.vo;
 
 import lombok.Data;
-
+/**
+ * @author Suww
+ */
 @Data
 public class SysOperLogQueryVo {
 
